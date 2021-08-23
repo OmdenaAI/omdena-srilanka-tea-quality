@@ -11,7 +11,7 @@ Note : Please Follow the below guidelines to create task folders
 
 | Task No| Task Name | Details |
 |-|-|-|
-|1|         |   Data Collection      |
-|2|         |   Data Preprocessing      |
-|3|         |   Data analysis     |
-|4|         |   Model Building    |
+|1|      Data Collection   |         |
+|2|      Data Preprocessing    |         |
+|3|      Data analysis    |        |
+|4|      Model Building   |      |
