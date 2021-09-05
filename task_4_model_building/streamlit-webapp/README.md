@@ -1,8 +1,8 @@
 
 ## General info
 This application provides an inteface to detect and classify tea leaves.
-![alt text](https://github.com/omdena-srilanka-tea-quality/task_4_model_building/streamlit-webapp/deployment-1?raw=true)
-
+![snippets](https://github.com/omdena-srilanka-tea-quality/task_4_model_building/streamlit-webapp/deployment-1.png?raw=true)
+![snippets](https://github.com/omdena-srilanka-tea-quality/task_4_model_building/streamlit-webapp/deployment-1.png?raw=true)
 	
 ## Dependencies
 * Docker
