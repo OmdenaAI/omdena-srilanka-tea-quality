@@ -1,8 +1,6 @@
 
 ## General info
 This application provides an inteface to detect and classify tea leaves.
-![snippets](https://github.com/omdena-srilanka-tea-quality/task_4_model_building/streamlit-webapp/deployment-1.png?raw=true)
-![snippets](https://github.com/omdena-srilanka-tea-quality/task_4_model_building/streamlit-webapp/deployment-1.png?raw=true)
 	
 ## Dependencies
 * Docker
@@ -30,6 +28,8 @@ $ deepstack --VISION-DETECTION True --PORT 80
 **-v localstorage:/datastore** This specifies the local volume where DeepStack will store all data.
 
 **-p 80:5000** This makes DeepStack accessible via port 80 of the machine.
+
+
 
 ## Run App
 ```
