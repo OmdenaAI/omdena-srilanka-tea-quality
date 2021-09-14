@@ -9,6 +9,12 @@ import os
 import sys
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import efficientnet.tfkeras as efn
+from model import withered_model, fresh_model
+
+
+# Loading Model
+fresh_model = fresh_model()
+withered_model = withered_model()
 
 # Title and Description
 st.title('Omdena Tea Leaf Classification')
@@ -25,8 +31,7 @@ if gpus:
     tf.config.experimental.set_memory_growth(gpus[0], True)
 
 if choice == "Withered Category":
-    # Loading Model
-    model = tf.keras.models.load_model("C:/Users/DCL/Desktop/Tea leaf/Deployment/Omdena Tea Leaf/Streamlit-WebApp-Tea Leaf/Withered_VGG19_Model.h5")
+
 
     # Upload the image
     uploaded_file = st.file_uploader("Choose a Image file", type=["png", "jpg"])
@@ -47,7 +52,7 @@ if choice == "Withered Category":
        image_batch = resized_image[np.newaxis, :, :, :]
 
        # Getting the predictions fom the model
-       predictions_arr = model.predict(image_batch)
+       predictions_arr = withered_model.predict(image_batch)
 
        predictions = np.argmax(predictions_arr)
 
@@ -59,9 +64,6 @@ if choice == "Withered Category":
            st.error(result_text)
            
 elif choice == "Fresh Category":
-    # Loading Model
-    model = tf.keras.models.load_model("C:/Users/DCL/Desktop/Tea leaf/Deployment/Omdena Tea Leaf/Streamlit-WebApp-Tea Leaf/Fresh_VGG16_Model.h5")
-
     # Upload the image
     uploaded_file = st.file_uploader("Choose a Image file", type=["png", "jpg"])
 
@@ -81,7 +83,7 @@ elif choice == "Fresh Category":
        image_batch = resized_image[np.newaxis, :, :, :]
 
        # Getting the predictions fom the model
-       predictions_arr = model.predict(image_batch)
+       predictions_arr = fresh_model.predict(image_batch)
 
        predictions = np.argmax(predictions_arr)
 
