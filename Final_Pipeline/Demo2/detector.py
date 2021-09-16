@@ -1,15 +1,9 @@
 # Import libraries
 import numpy as np
 import requests
-<<<<<<< HEAD
 from PIL import ImageDraw, ImageFont, Image
 from tqdm import tqdm
 from pathlib import Path
-=======
-from PIL import Image, ImageDraw, ImageFont
-from tqdm import tqdm
-
->>>>>>> origin
 
 classes = ['Below-Best', 'Best', 'Poor']
 
@@ -33,11 +27,7 @@ def annotate_leaves(image, response):
 	# create imagedraw object
     draw = ImageDraw.Draw(image)
 	# create font
-<<<<<<< HEAD
     roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'Roboto-Bold.ttf'), 40)
-=======
-    roboto_font = ImageFont.truetype('/home/busayor/Shiii/Omdena/Sri-Lanka/web-app/Oswald,Roboto/Roboto/Roboto-Bold.ttf', 40)
->>>>>>> origin
 
 	# annotate every detection found and labels them
     for  detection in tqdm(response["predictions"], total=len(response['predictions'])):
@@ -62,11 +52,7 @@ def predict_leaves(image, response, model, size=(224, 224)):
 	# create imagedraw object
     draw = ImageDraw.Draw(image)
 	# create font
-<<<<<<< HEAD
     roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'Roboto-Bold.ttf'), 40)
-=======
-    roboto_font = ImageFont.truetype('/home/busayor/Shiii/Omdena/Sri-Lanka/web-app/Oswald,Roboto/Roboto/Roboto-Bold.ttf', 40)
->>>>>>> origin
     
 	# crop detected leaves and pass into classifier for classification, returns annotation with class label
     for  detection in tqdm(response["predictions"], total=len(response['predictions'])):
