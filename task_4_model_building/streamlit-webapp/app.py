@@ -1,11 +1,11 @@
 # import libraries
 import streamlit as st
 from model import fresh_model, withered_model
-import cv2
-from PIL import Image, ImageOps
-import numpy as np
+from PIL import Image
 from detector import annotate_leaves, predict_leaves, get_leaves
-from os import path
+import subprocess
+from pathlib import Path
+import atexit
 
 
 
@@ -13,6 +13,18 @@ from os import path
 st.set_page_config(page_title='Tea-Leaves Classification', page_icon='🌿')
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
+
+# Pull and connect deepstack custom api port to detection model
+@st.cache
+def pull_image():
+    subprocess.run(['docker', 'run', '-d', '--name', 'leaf-detector', '-v', Path(__file__).resolve().parent / 'detector:/modelstore/detection', '-p', '80:5000', 'deepquestai/deepstack'])
+
+# Stop and delect docker container after script is terminated
+@atexit.register
+def stop_docker_image():
+    subprocess.run(['docker', 'stop', 'leaf-detector'])
+    subprocess.run(['docker', 'rm', 'leaf-detector'])
+
 # Instatiates neccessary model
 @st.cache(allow_output_mutation=True)
 def load_fresh_model():
@@ -24,6 +36,7 @@ def load_withered_model():
     model_withered = withered_model()
     return model_withered
 
+pull_image()
 fresh_model = load_fresh_model()
 withered_model = load_withered_model()
 
