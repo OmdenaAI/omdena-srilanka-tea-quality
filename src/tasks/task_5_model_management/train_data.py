@@ -3,8 +3,8 @@ import our_model as omd
 from load_dataset import load_dataset
 
 if __name__ == '__main__':
-    mlflow.set_experiment('direct-marketing-xgboost')
-    with mlflow.start_run(run_name='direct-marketing-xgboost-basic') as run:
+    mlflow.set_experiment('name')
+    with mlflow.start_run(run_name='name') as run:
         x_train, x_test, y_train, y_test = load_dataset(
             'our-dataset', ';'
         )
