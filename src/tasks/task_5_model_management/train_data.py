@@ -11,8 +11,8 @@ if __name__ == '__main__':
         cls = omd.our_model(some parameters)
         cls.fit(x_train, y_train)
         auc = cls.score(x_test, y_test)
-        print("AUC ", auc)
-        mlflow.log_metric("auc", auc)
+        print("AUC ", auc) #printing the metric down here
+        mlflow.log_metric("auc", auc) # we can even do a logging even after single epoch
 
         mlflow.our_model.log_model(cls, "name")
         mlflow.end_run()
