@@ -4,7 +4,7 @@ from flask import Flask, jsonify , request
 app = Flask(__name__)
 
 #This decorator immediately converts the function into URI end point and we can have several different routes
-@app.route('/' , methods=['GET', 'POST']) 
+@app.route('/' , methods=['GET', 'POST'])
 
 def index():
 
@@ -13,11 +13,11 @@ def index():
 		some_json = request.get_json()
 		return jsonify({'you sent' : some_json}) , 201
 	else:
-		return jsonify({'about'} : "Hello World!")	
+		return jsonify({'about' : "Hello World!"})
 
 # If you will not specifically declare any method then the default will be GET
-@app.route('/multl/<int:num>' , methods = ['GET'])	
-def get_multiply():
+@app.route('/multl/<int:num>' , methods = ['GET'])
+def get_multiply(num=None):
 	return jsonify({"result" : num * 10})
 
 if __name__ == '__main__':
