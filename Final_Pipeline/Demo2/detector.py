@@ -27,7 +27,7 @@ def annotate_leaves(image, response):
 	# create imagedraw object
     draw = ImageDraw.Draw(image)
 	# create font
-    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'Roboto-Bold.ttf'), 40)
+    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'fonts/Roboto-Bold.ttf'), 40)
 
 	# annotate every detection found and labels them
     for  detection in tqdm(response["predictions"], total=len(response['predictions'])):
@@ -52,7 +52,7 @@ def predict_leaves(image, response, model, size=(224, 224)):
 	# create imagedraw object
     draw = ImageDraw.Draw(image)
 	# create font
-    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'Roboto-Bold.ttf'), 40)
+    roboto_font = ImageFont.truetype(str(Path(__file__).resolve().parent /  'fonts/Roboto-Bold.ttf'), 40)
     
 	# crop detected leaves and pass into classifier for classification, returns annotation with class label
     for  detection in tqdm(response["predictions"], total=len(response['predictions'])):

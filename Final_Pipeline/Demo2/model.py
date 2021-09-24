@@ -15,7 +15,7 @@ def fresh_model():
     adam_opt = Adam(lr=1e-5, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=1e-5)
     
     model.layers[0].trainable = True
-    model.load_weights(Path(__file__).resolve().parent / 'VGG16-tea-fresh-Weights.h5')
+    model.load_weights(Path(__file__).resolve().parent / 'models/VGG16-tea-fresh-Weights.h5')
     return model
 
 # build withered model
@@ -29,5 +29,5 @@ def withered_model():
     model.add(Dense(units=3, activation='softmax'))
     
     model.layers[0].trainable = True
-    model.load_weights(Path(__file__).resolve().parent / 'VGG19-tea-Withered-Weights.h5')
+    model.load_weights(Path(__file__).resolve().parent / 'models/VGG19-tea-Withered-Weights.h5')
     return model
