@@ -15,7 +15,7 @@ def index():
 	else:
 		return jsonify({'about'} : "Hello World!")	
 
-# If you will not specifically declare any methof then the default will be GET
+# If you will not specifically declare any method then the default will be GET
 @app.route('/multl/<int:num>' , methods = ['GET'])	
 def get_multiply():
 	return jsonify({"result" : num * 10})
