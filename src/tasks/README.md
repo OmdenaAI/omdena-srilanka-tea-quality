@@ -15,3 +15,5 @@ Note : Please Follow the below guidelines to create task folders
 |2|      Data Preprocessing    |         |
 |3|      Data analysis    |        |
 |4|      Model Building   |      |
+|5|      Model Management |      |
+|6|      Model Serving |         |
