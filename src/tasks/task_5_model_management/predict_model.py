@@ -24,5 +24,6 @@ if __name__ == '__main__':
         Body=input_data,
         ContentType='application/json; format=pandas-split'
     )
+    
     prediction = prediction['Body'].read().decode("ascii")
     print(prediction)
