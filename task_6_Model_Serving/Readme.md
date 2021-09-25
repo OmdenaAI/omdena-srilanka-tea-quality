@@ -21,3 +21,7 @@ $ cd omdena-srilank-tea-quality/task_6_model_serving/src/
 $ pip install -r requirements.txt
 $ python basic_flask.py
 ```
+
+## Resources
+
+[REST vs RESTful](https://blog.ndepend.com/rest-vs-restful/)
