@@ -130,3 +130,6 @@ dmypy.json
 
 # Ignore .DS_Store file
 *.DS_Store
+
+# Ignore bin folder
+**/*env/
