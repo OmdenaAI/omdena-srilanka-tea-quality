@@ -30,7 +30,6 @@ As the name speaks itself, it's gonna make python environment inside the contain
 ***Now let's deply it***
 
 It's again a single line of code
-
 ```python
 mlflow sagemaker deploy -a $APP_NAME -m $MODEL_PATH -e $ROLE --region-name $REGION
 ```
