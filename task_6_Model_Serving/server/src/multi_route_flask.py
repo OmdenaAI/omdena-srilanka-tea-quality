@@ -4,7 +4,7 @@ from flask import Flask, jsonify , request
 app = Flask(__name__)
 
 #This decorator immediately converts the function into URI end point and we can have several different routes
-@app.route('/' , methods=['GET', 'POST']) 
+@app.route('/' , methods=['GET', 'POST'])
 
 def index():
 
