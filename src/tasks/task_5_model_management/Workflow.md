@@ -37,5 +37,5 @@ mlflow sagemaker deploy -a $APP_NAME -m $MODEL_PATH -e $ROLE --region-name $REGI
 
 # Step 4
 
-Now here comes the task of giving prediction, so we will use *predict_model.py* here. This is what the sagemaker will run for us and will give the prediction back to app.
+Now here comes the task of giving prediction, so we will use *predict_model.py* here.This is what the sagemaker will run for us and will give the prediction back to app.
 

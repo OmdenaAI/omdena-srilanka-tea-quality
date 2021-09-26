@@ -13,10 +13,10 @@ def index():
 		some_json = request.get_json()
 		return jsonify({'you sent' : some_json}) , 201
 	else:
-		return jsonify({'about' : "Hello World!"})
+		return jsonify({'about' : "Hello World!"})	
 
 # If you will not specifically declare any method then the default will be GET
-@app.route('/multl/<int:num>' , methods = ['GET'])
+@app.route('/multl/<int:num>' , methods = ['GET'])	
 def get_multiply(num=None):
 	return jsonify({"result" : num * 10})
 
