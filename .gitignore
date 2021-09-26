@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Ignore .DS_Store files
+# Ignore .DS_Store file
 *.DS_Store
+
+# Ignore bin folder
+**/*env/

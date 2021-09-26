@@ -27,6 +27,5 @@ if __name__ == '__main__':
     x_train, x_test, y_train, y_test = load_dataset(
         'our-dataset', ';'
     )
-    
     print(x_train.head())
     print(y_train.head())
