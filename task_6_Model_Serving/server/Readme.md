@@ -1,6 +1,15 @@
 # Server Side
 
 
+<img src="ServerArchitecture.JPG">
+
+## Expose Model As An API
+1. Model Trainig will happen in server(i.e. where ever training of model is done is refered as server here)
+2. Model can be saved with .h5, .pkl, .sav
+3. Hosting the model in server side using Flask Framework
+4. Now Flask API can be consumend by mobile app.
+5. Connect with S3 bucket to save the output of for data archival 
+
 
 ## Flask Api Deployment in EC2 instance AWS
 1. Flask code
