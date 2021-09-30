@@ -1,7 +1,7 @@
 # Server Side
 
 
-<img src="ServerArchitecture.JPG">
+<img src="ServerArchitecture .JPG">
 
 ## Expose Model As An API
 1. Model Trainig will happen in server(i.e. where ever training of model is done is refered as server here)
