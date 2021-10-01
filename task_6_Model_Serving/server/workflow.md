@@ -11,7 +11,7 @@
  
 - Choose Ubuntu Server ( We can choose other one also but i do have some familarity with this)
 
--Then create a new Key pair (It will take around 1 minute or so)
+- Then create a new Key pair (It will take around 1 minute or so)
 
 - Now we have to include our port number where we are going to run our program.
 
