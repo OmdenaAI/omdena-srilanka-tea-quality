@@ -6,15 +6,14 @@
 - **Flask** :- It's a micro web framework written in Python.
 
 # Steps
+ 
+- Create a new EC2 Instance
+ 
+- Choose Ubuntu Server ( We can choose other one also but i do have some familarity with this)
 
-- **Step 1** 
- Create a new EC2 Instance
-- **Step 2** 
-Choose Ubuntu Server ( We can choose other one also but i do have some familarity with this)
-- **Step 3** 
-Then create a new Key pair (It will take around 1 minute or so)
-- **Step 4**
-Now we have to include our port number where we are going to run our program.
+-Then create a new Key pair (It will take around 1 minute or so)
+
+- Now we have to include our port number where we are going to run our program.
 
 - For that scroll down the description, and in `Security groups` there is `launch-wizard` option choose it.
 
@@ -22,26 +21,20 @@ Now we have to include our port number where we are going to run our program.
 
 - New page will open then click on `Add Rule`, then add the `Port Number`(eg 80) and `Source` (eg 0.0.0.0/0). Then save the `rules`.
 
-- **Step 5**
 
-As we have already created key value pair, so  we can download it and save it at someplace. 
+- As we have already created key value pair, so  we can download it and save it at someplace. 
 
-Let just say we save it at `C Drive`->`user`->`your_folder name`->`make a folder named .ssh`. Inside the `.ssh` folder we have saved it.
+- Let just say we save it at `C Drive`->`user`->`your_folder name`->`make a folder named .ssh`. Inside the `.ssh` folder we have saved it.
 
-- **Step 6**
+- Now inside the EC2 Dashboard click on `Connect` option and choose standalone SSH Client and copy the code written inside th Example is bold black.
 
-Now inside the EC2 Dashboard click on `Connect` option and choose standalone SSH Client and copy the code written inside th Example is bold black.
+- Now open `CMD` and go inside the `.ssh` folder directory using `cd` command and then paste that code on terminal.  They will ask for `Yes/No`, click on `Yes`.
 
-Now open `CMD` and go inside the `.ssh` folder directory using `cd` command and then paste that code on terminal.  They will ask for `Yes/No`, click on `Yes`.
+- Now we are succcesfully connected to our `EC2 Instance`.
 
-Now we are succcesfully connected to our `EC2 Instance`.
-- **Step 7**
+- Now we can download our program from `Github` (Always put every single content of project on Github) by using `git clone`.
 
-Now we can download our program from `Github` (Always put every single content of project on Github) by using `git clone`.
-
-- **Step 8**
-
-(All the required installing part)
+***(All the required installing part)***
 
 - Do `sudo apt-get update` on terminal
 - Then `sudo apt-get install python-pip3`
@@ -49,13 +42,12 @@ Now we can download our program from `Github` (Always put every single content o
 - `sudo apt-get install nginx`
 - `sudo apt-get gunicorn3`
 
-- **Step 9**
 
-Now just go inside the python file inside which we have written our python code.
+- Now just go inside the python file inside which we have written our python code.
 
-- `python3 flaskapp.py`
+- run this code `python3 flaskapp.py`
 
-Now we can see our application running on web by copyinh `IPv4 Public IP` from the `Description` in the `EC2 Instance Dashboard`.
+- Now we can see our application running on web by copyinh `IPv4 Public IP` from the `Description` in the `EC2 Instance Dashboard`.
 
 <!-- - `pip install --user -r requirements.txt` -->
 
