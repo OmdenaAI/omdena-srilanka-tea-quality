@@ -1,4 +1,4 @@
-# Requied Software Packages
+# Required Software Packages
 
 - **Python3** and **PIP** package manager
 - **Nginx** :- It's a web server which can also be used as a reverse proxy, load balancer and mail proxy.
