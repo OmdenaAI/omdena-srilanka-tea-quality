@@ -1,6 +1,6 @@
 {
-    "name": "flutter_myapp",
-    "short_name": "flutter_myapp",
+    "name": "omdena_srilanka_tea_quality_client",
+    "short_name": "omdena_srilanka_tea_quality_client",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

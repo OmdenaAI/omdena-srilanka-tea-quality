@@ -2,7 +2,7 @@ import 'dart:async';
 // import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_myapp/pages/home_page.dart';
+import 'home_page.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-package com.example.omdena_srilanka_tea_quality_client
+package com.omdena.lk.teaquality
 
 import io.flutter.embedding.android.FlutterActivity
 

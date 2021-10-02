@@ -1,33 +1,12 @@
-# omdena_srilanka_tea_quality_client
+# Client
 
-Client side application of Omdena Sri Lanka Tea Quality Project
+<img src="ClientArchitecture.JPG">
 
-## Getting Started
+## Deploying Model In Mobile
 
-> TLDR;
->
-> 1.  Install flutter
-> 2.  cd task_6_Model_Serving/client
-> 3.  flutter run
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-## How to contribute
-
-1. Clone the repo
-2. Create a new branch ( `{your_name}/{feature_name}` is preferred, not compulsory)
-3. Make changes, commit them
-4. Send a pull request to `client-main` branch
-
-## UI Prototype
-
-<img src="ux_design.png">
+1. Model Trainig will happen in server(i.e. where ever training of model is done is refered as server here).
+2. Model can be saved with .h5, .pkl, .sav, .tfjs extensions.
+3. Covert the model to Tf lite using Tesnorflow API.
+4. Then deployment of the TF Lite model using flutter.
+5. Capture the image from mobile camera or browse from galary to predict the prediction in offline mode.
+6. Connect with S3 bucket to save the output of for data archival.

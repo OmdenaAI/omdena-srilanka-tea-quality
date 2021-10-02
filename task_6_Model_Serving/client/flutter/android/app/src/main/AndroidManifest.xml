@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_myapp">
+    package="com.omdena.lk.teaquality">
    <application
-        android:label="flutter_myapp"
+        android:label="omdena_lk_teaquality"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
