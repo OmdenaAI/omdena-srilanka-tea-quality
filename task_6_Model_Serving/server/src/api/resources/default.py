@@ -1,4 +1,6 @@
 from flask_restful import Resource
+from http import HTTPStatus
+
 from api.app import api
 
 
@@ -26,7 +28,7 @@ class DefaultResource(Resource):
         return {
             'status': 'success',
             'msg': 'Welcome to the Tea Leaf API!'
-        }
+        }, HTTPStatus.OK
 
 
 api.add_resource(DefaultResource, '/api/', endpoint='home')

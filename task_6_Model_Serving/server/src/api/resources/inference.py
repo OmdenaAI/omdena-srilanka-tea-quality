@@ -6,6 +6,7 @@ from flask import request, Response, current_app
 from flask_restful import Resource, reqparse
 import werkzeug
 import os
+from http import HTTPStatus
 
 from api.app import api
 from api.config import env_config
@@ -54,7 +55,7 @@ class InferencesResource(Resource):
             return {
                 'status': 'error',
                 'msg': 'No file found'
-            }
+            }, HTTPStatus.BAD_REQUEST
 
         # read image file from the stream
         img = args['file']
@@ -70,22 +71,12 @@ class InferencesResource(Resource):
             return {
                 'status': 'success',
                 'msg': 'image uploaded'
-            }
+            }, HTTPStatus.OK
         # Return error json
         return {
             'status': 'error',
             'msg': 'Something went wrong'
-        }
+        }, HTTPStatus.BAD_REQUEST
 
 
 api.add_resource(InferencesResource, '/api/inferences')
-# api.add_resource(InferencesResource, '/api/inferences', resource_class_kwargs={
-#     'upload_folder': current_app.config['UPLOAD_FOLDER'],
-#     'allowed_exts': current_app.config['ALLOWED_EXTENSIONS']
-# })
-
-# api.add_resource(InferencesApi, '/api/inferences', resource_class_kwargs={
-#     'upload_folder': api.config['UPLOAD_FOLDER'],
-#     'allowed_exts': api.config['ALLOWED_EXTENSIONS'],
-#     'logger': logging.getLogger('my_custom_logger')
-# })
