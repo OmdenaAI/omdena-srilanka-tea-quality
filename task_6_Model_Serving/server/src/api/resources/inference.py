@@ -59,6 +59,12 @@ class InferencesResource(Resource):
 
         # read image file from the stream
         img = args['file']
+        img_ext = os.path.splitext(img)[1]
+        if img_ext not in self.allowed_exts:
+            return {
+                'status': 'error',
+                'msg': 'Invalid file'
+            }, HTTPStatus.BAD_REQUEST
         if img:
             # Static filename
             file_name = 'up_img.jpg'
