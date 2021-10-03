@@ -32,6 +32,9 @@ def inference_api(base_url, filepath):
         print('Response status :', res_json['status'])
     else:
         print('Something went wrong')
+        print('---Response---')
+        print(response.status_code)
+        print(response.text)
 
 
 if __name__ == "__main__":
