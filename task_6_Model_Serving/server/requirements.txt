@@ -1,3 +1,4 @@
 # requirements.txt
 Flask==2.0.1
 Flask-RESTful==0.3.9
+Flasgger==0.9.5
