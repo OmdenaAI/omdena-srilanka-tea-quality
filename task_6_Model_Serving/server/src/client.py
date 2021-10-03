@@ -24,11 +24,14 @@ def inference_api(base_url, filepath):
     # Send the request to the server
     response = post(url, files=files)
     # Read the json content from response object
-    res_json = response.json()
-    # Display the json content
-    print('Response msg    :', res_json['message'])
-    print('Response status :', res_json['status'])
-    print('Response data   :', res_json['data'])
+    if response.status_code == 200:
+        res_json = response.json()
+        # print(res_json)
+        # Display the json content
+        print('Response msg    :', res_json['msg'])
+        print('Response status :', res_json['status'])
+    else:
+        print('Something went wrong')
 
 
 if __name__ == "__main__":
