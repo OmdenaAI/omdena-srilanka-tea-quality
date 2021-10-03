@@ -9,7 +9,7 @@ class Config:
     UPLOAD_FOLDER = os.environ.get(
         "UPLOAD_FOLDER"
     ) or os.path.join(os.path.dirname(os.path.dirname(basedir)), "uploads", "images")
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+    ALLOWED_EXTENSIONS = {'.png', '.jpg', '.jpeg'}
     MAX_CONTENT_LENGTH = 1024 * 1024  # 1 MB
 
     @staticmethod
