@@ -10,17 +10,19 @@ class Docs:
             "info": {
                 "title": "Omdena Tea Leaf Quality Prediction API",
                 "description": "API for the tea leaf quality prediction",
+                "version": "0.1.1",
                 "contact": {
-                    "responsibleOrganization": "Omdena AI",
-                    "responsibleDeveloper": "Omdena AI",
-                },
-                "version": "0.1.0"
+                    "name": "Omdena AI",
+                    "url": "https://omdena.com/omdena-chapter-page-srilanka/",
+                }
             },
             # "host": env_config[config_name].HOST,  # overrides localhost:500
-            "basePath": "/api",  # base bash for blueprint registration
+            # "basePath": "/api",  # base bash for blueprint registration
             "schemes": [LazyString(lambda: 'https' if request.is_secure else 'http')]
         }
         self.swagger_config = {
+            "title": "Omdena Tea Leaf Prediction API",
+            "uiversion": 3,
             "headers": [
             ],
             "specs": [
