@@ -3,6 +3,7 @@ from flask import Flask
 from flask_restful import Api
 from webargs.flaskparser import abort, parser
 from werkzeug import exceptions
+import os
 
 from api.docs import Docs
 from api.utils import errors
@@ -52,3 +53,10 @@ def create_app(config_name):
         abort(error_status_code, errors=err.messages)
 
     return app
+
+
+if __name__ == "__main__":
+    env = os.getenv("FLASK_ENV")
+    # print(env)
+    application = create_app(env)
+    application.run()
