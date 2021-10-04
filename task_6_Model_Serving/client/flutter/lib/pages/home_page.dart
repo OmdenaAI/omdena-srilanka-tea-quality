@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
                         style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             onPrimary: Colors.black,
-                            padding: EdgeInsets.all(20),
-                            minimumSize: Size(200, 60))),
+                            padding: const EdgeInsets.all(20),
+                            minimumSize: const Size(200, 60))),
                     ElevatedButton(
                       onPressed: () {
                         print('Browse from gallery!');
@@ -55,8 +55,8 @@ class _HomePageState extends State<HomePage> {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           onPrimary: Colors.black,
-                          padding: EdgeInsets.all(20),
-                          minimumSize: Size(200, 60)),
+                          padding: const EdgeInsets.all(20),
+                          minimumSize: const Size(200, 60)),
                     )
                   ],
                 ),
