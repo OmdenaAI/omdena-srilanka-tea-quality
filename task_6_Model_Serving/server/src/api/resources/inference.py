@@ -12,6 +12,7 @@ import imghdr
 
 from api.app import api
 from api.config import env_config
+from api.utils.storage import Storage
 
 # Parser to parse the POST request
 parser = reqparse.RequestParser()
@@ -27,14 +28,11 @@ class InferencesResource(Resource):
     """
 
     def __init__(self, **kwargs):
-        # print(kwargs)
-        # conf = env_config[kwargs.get('config_name')]
-        self.upload_folder = current_app.config['UPLOAD_FOLDER']
         self.allowed_exts = current_app.config['ALLOWED_EXTENSIONS']
         self.logger = kwargs.get('logger')
 
-        # print(self.upload_folder)
         # print(self.allowed_exts)
+        self.storage_handler = Storage()
 
     def post(self):
         """
@@ -95,7 +93,8 @@ class InferencesResource(Resource):
                     'status': 'error',
                     'msg': 'Invalid file'
                 }, HTTPStatus.BAD_REQUEST
-        uploaded_file.save(os.path.join(self.upload_folder, filename))
+        self.storage_handler.save_file(
+            uploaded_file, filename, request.mimetype)
         # TODO: Add logic to call model methods
         # ...
 
