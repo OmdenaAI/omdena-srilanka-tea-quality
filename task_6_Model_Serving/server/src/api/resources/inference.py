@@ -13,6 +13,7 @@ import imghdr
 from api.app import api
 from api.config import env_config
 from api.utils.storage import Storage
+from models.predictor import Predictor
 
 # Parser to parse the POST request
 parser = reqparse.RequestParser()
@@ -33,6 +34,7 @@ class InferencesResource(Resource):
 
         # print(self.allowed_exts)
         self.storage_handler = Storage()
+        self.predictor = Predictor()
 
     def post(self):
         """
@@ -95,8 +97,9 @@ class InferencesResource(Resource):
                 }, HTTPStatus.BAD_REQUEST
         self.storage_handler.save_file(
             uploaded_file, filename, request.mimetype)
-        # TODO: Add logic to call model methods
-        # ...
+
+        result = self.predictor.predict(uploaded_file)
+        # TODO: Prepare response from the result above.
 
         # Return response json
         return {
