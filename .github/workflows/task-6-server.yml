@@ -7,8 +7,6 @@ env:
   EB_ENVIRONMENT_NAME      : "Omdenatealeafqualitypredictionapi-env"
   DEPLOY_PACKAGE_NAME      : "task-6-server-api-${{ github.sha }}.zip"  # zip file name that will store in s3 bucket with unique value
   AWS_REGION_NAME          : "ap-south-1"  # your application region
-  TASK_6_SERVER_AWS_ACCESS_KEY: AKIAQ7RSW3DLQZNQ5TSL      # TODO: Remove this once we add it in repo secrets
-  TASK_6_SERVER_AWS_SECRET_KEY: 0DW87hrWPhjvYwzOP0jJZbazzzCAEmQYvD6GCPH0  # TODO: Remove this once we add it in repo secrets
 
 
 # Controls when the workflow will run
@@ -41,8 +39,8 @@ jobs:
       - name : Configure my AWS Credentials
         uses : aws-actions/configure-aws-credentials@v1
         with :
-          aws-access-key-id     : ${{ env.TASK_6_SERVER_AWS_ACCESS_KEY }}
-          aws-secret-access-key : ${{ env.TASK_6_SERVER_AWS_SECRET_KEY }}
+          aws-access-key-id     : ${{ secrets.TASK_6_SERVER_AWS_ACCESS_KEY }}
+          aws-secret-access-key : ${{ secrets.TASK_6_SERVER_AWS_SECRET_KEY }}
           aws-region            : ${{ env.AWS_REGION_NAME }}
       
       - name: Copy our Deployment packages to s3 bucket
@@ -59,8 +57,8 @@ jobs:
       - name : Configure my AWS Credentials
         uses : aws-actions/configure-aws-credentials@v1
         with :
-          aws-access-key-id     : ${{ env.TASK_6_SERVER_AWS_ACCESS_KEY }}
-          aws-secret-access-key : ${{ env.TASK_6_SERVER_AWS_SECRET_KEY }}
+          aws-access-key-id     : ${{ secrets.TASK_6_SERVER_AWS_ACCESS_KEY }}
+          aws-secret-access-key : ${{ secrets.TASK_6_SERVER_AWS_SECRET_KEY }}
           aws-region            : ${{ env.AWS_REGION_NAME }}
       
       - name : Create new ElasticBean Application Version
