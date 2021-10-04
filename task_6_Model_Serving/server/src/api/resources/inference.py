@@ -40,7 +40,27 @@ class InferencesResource(Resource):
         """
         Upload image to get inference from model
         ---
+        tags:
+        - Inference
+        consumes:
+        - multipart/form-data  
+        parameters:
+        - name: file
+          required: true
+          in: formData
+          type: file
+          description: Upload your file.
         responses:
+          400:
+            description: Bad request
+            schema:
+              properties:
+                status:
+                  type: string
+                  description: Status of the request
+                msg:
+                  type: string
+                  description: Error msg of the prediction
           200:
             description: Status of the uploaded image
             schema:
