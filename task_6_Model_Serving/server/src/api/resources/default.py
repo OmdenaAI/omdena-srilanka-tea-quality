@@ -13,6 +13,8 @@ class DefaultResource(Resource):
         """
         Default api route handler
         ---
+        tags:
+        - Home
         responses:
           200:
             description: Simple welcome message
