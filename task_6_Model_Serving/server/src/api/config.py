@@ -27,6 +27,8 @@ class LocalStorageConfig(Config):
     UPLOAD_FOLDER = os.environ.get(
         "UPLOAD_FOLDER"
     ) or os.path.join(os.path.dirname(os.path.dirname(basedir)), "uploads", "images")
+    MODEL_FILE = os.path.join(os.path.dirname(basedir), "models", "ENSEMBLE_Withered.h5")
+    # print(UPLOAD_FOLDER)
 
 
 class DevelopmentConfig(LocalStorageConfig):
