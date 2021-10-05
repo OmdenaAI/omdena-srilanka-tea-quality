@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'dart:async';
 // import 'dart:js';
 
@@ -12,17 +14,24 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  late Size size;
   @override
   void initState() {
     super.initState();
     Timer(
-        const Duration(milliseconds: 1500),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomePage())));
+      const Duration(milliseconds: 1500),
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -31,13 +40,22 @@ class _SplashState extends State<Splash> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(children: [
-                Image.asset('assets/images/logo.png', height: 300, width: 300),
-                const Text(
+                Container(
+                  height: size.width * 0.4,
+                  width: size.width * 0.4,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                    ),
+                  ),
+                ),
+                Text(
                   "Classy Tea",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 40,
+                    fontSize: size.width * 0.04,
                   ),
                 ),
               ])

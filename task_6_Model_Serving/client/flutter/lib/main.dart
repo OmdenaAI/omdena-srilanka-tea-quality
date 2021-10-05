@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:omdena_srilanka_tea_quality_client/providers/result_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/splash.dart';
 
@@ -11,6 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Splash());
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ResultProvider()),
+      ],
+      child: const MaterialApp(
+        title: "Classy Tea",
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+      ),
+    );
   }
 }
