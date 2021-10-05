@@ -25,6 +25,7 @@ class S3Storage:
 class LocalStorage:
     def __init__(self):
         conf = current_app.config
+        # print(conf)
         if not conf['DEBUG']:
             raise Exception('Unexpected environment')
         self.upload_folder = conf['UPLOAD_FOLDER']
