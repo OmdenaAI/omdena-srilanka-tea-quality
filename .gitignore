@@ -140,3 +140,6 @@ uploads/
 
 # Ignore .zip files
 *.zip
+
+# Ignore .h5 model files
+*.h5
