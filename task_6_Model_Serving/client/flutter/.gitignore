@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# override /lib ignore mentioned in root .gitignore
+!lib/
