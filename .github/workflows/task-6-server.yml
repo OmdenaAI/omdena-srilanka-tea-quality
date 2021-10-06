@@ -31,10 +31,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name : Git clone our repository
-        uses : actions/checkout@v2
+        uses : actions/checkout@v1
 
       - name : Create ZIP deployment package
-        run  : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./task_6_Model_Serving/server/src/
+        run  : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./task_6_Model_Serving/server/src/ -x *.git*
       
       - name : Configure my AWS Credentials
         uses : aws-actions/configure-aws-credentials@v1
@@ -43,7 +43,7 @@ jobs:
           aws-secret-access-key : ${{ secrets.TASK_6_SERVER_AWS_SECRET_KEY }}
           aws-region            : ${{ env.AWS_REGION_NAME }}
       
-      - name: Copy our Deployment packages to s3 bucket
+      - name: Copy our Deployment packages to S3 bucket
         run : aws s3 cp ${{ env.DEPLOY_PACKAGE_NAME }} s3://${{ env.EB_PACKAGE_S3_BUCKET_NAME }}/
       
       - name : Print nice message on complete of CI Pipeline
