@@ -1,0 +1,70 @@
+Upload image to get inference from model
+---
+tags:
+  - Inference
+consumes:
+  - multipart/form-data
+parameters:
+  - name: file
+    required: true
+    in: formData
+    type: file
+    description: Upload your file.
+definitions:
+  StatusModel:
+    type: object
+    properties:
+      status:
+        type: string
+        description: Status of the request
+      msg:
+        type: string
+        description: Status msg
+  SuccessStatusModel:
+    allOf:
+      - $ref: "#/definitions/StatusModel"
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the image uploaded
+              predictions:
+                type: object
+                properties:
+                  withered:
+                    $ref: "#/definitions/Prediction"
+                  fresh:
+                    $ref: "#/definitions/Prediction"
+  Prediction:
+    type: object
+    properties:
+      percent:
+        type: number
+        description: Percentage of withered or fresh leaves in the image
+      bbox:
+        type: object
+        properties:
+          x:
+            type: integer
+            description: Top-left point's X co-ordinate
+          y:
+            type: integer
+            description: Top-left point's Y co-ordinate
+          w:
+            type: integer
+            description: Width of the bounding box
+          h:
+            type: integer
+            description: Height of the bounding box
+responses:
+  400:
+    description: Bad request
+    schema:
+      $ref: "#/definitions/StatusModel"
+  200:
+    description: Status of the uploaded image
+    schema:
+      $ref: "#/definitions/SuccessStatusModel"
