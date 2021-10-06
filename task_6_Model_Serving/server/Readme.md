@@ -34,12 +34,12 @@ zip -r task-6-server-api-6bec1bc8ba53ac389e353f7e2d4d5c238d8db359.zip .
 
 - Go to AWS ElasticBeanstalk instance
 - Go to `Omdenatealeafqualitypredapi-env-manual` environment
-- Add following environment vars:
+- Add the following environment vars:
   - BUCKET_NAME = <S3 bucket name>
   - FLASK_DEBUG = 0
   - FLASK_ENV = staging
 - Click on `Upload and Deploy` button
-- Choose zip file created in above process
+- Choose the zip file created in the above process
 - Click "Deploy"
 
 **Test using ~/api/docs/ url**
