@@ -1,0 +1,10 @@
+Default api route handler
+---
+tags:
+  - Home
+responses:
+  200:
+    description: OK
+    schema:
+      type: string
+      example: "Welcome to the Tea Leaf API!"
