@@ -1,7 +1,3 @@
-// ignore_for_file: sized_box_for_whitespace
-
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:omdena_srilanka_tea_quality_client/pages/result_page.dart';
@@ -31,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       source: source,
       maxWidth: 512,
       maxHeight: 512,
+      imageQuality: 59,
     );
 
     if (image != null) {

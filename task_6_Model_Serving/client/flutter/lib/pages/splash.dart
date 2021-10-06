@@ -1,7 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
-
 import 'dart:async';
-// import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'home_page.dart';
