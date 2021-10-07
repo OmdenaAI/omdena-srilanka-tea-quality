@@ -1,10 +1,9 @@
-import 'dart:async';
-
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:omdena_srilanka_tea_quality_client/providers/result_provider.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
+
+import 'package:omdena_srilanka_tea_quality_client/providers/result_provider.dart';
+import 'package:omdena_srilanka_tea_quality_client/util/connectivity.dart';
 
 import 'pages/splash.dart';
 
@@ -20,42 +19,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // connectivity_plus
-  final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-  // setting initial state to not none to avoid "went online" notification at startup
-  ConnectivityResult _prevConnectivityStatus = ConnectivityResult.wifi;
+  final _connectivity = ConnectionStateListner();
 
   @override
   void initState() {
     super.initState();
-
-    // trigger when connection type changes
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        if (_prevConnectivityStatus != ConnectivityResult.none) {
-          // user has gone offline
-          showSimpleNotification(const Text("You are offline"),
-              background: Colors.red);
-        }
-      } else {
-        if (_prevConnectivityStatus == ConnectivityResult.none) {
-          // user has came online from offline state
-          showSimpleNotification(const Text("You are online"),
-              background: Colors.green);
-        }
-      }
-
-      _prevConnectivityStatus = result;
-    });
+    _connectivity.listen();
   }
 
   @override
   void dispose() {
     super.dispose();
-
-    _connectivitySubscription.cancel();
+    _connectivity.close();
   }
 
   @override
