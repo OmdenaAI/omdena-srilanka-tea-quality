@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:omdena_srilanka_tea_quality_client/providers/result_provider.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/splash.dart';
@@ -35,12 +36,14 @@ class _MyAppState extends State<MyApp> {
       if (result == ConnectivityResult.none) {
         if (_prevConnectivityStatus != ConnectivityResult.none) {
           // user has gone offline
-          print("User gone offline");
+          showSimpleNotification(const Text("You are offline"),
+              background: Colors.red);
         }
       } else {
         if (_prevConnectivityStatus == ConnectivityResult.none) {
           // user has came online from offline state
-          print("User came online");
+          showSimpleNotification(const Text("You are online"),
+              background: Colors.green);
         }
       }
 
@@ -61,10 +64,12 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => ResultProvider()),
       ],
-      child: const MaterialApp(
-        title: "Classy Tea",
-        debugShowCheckedModeBanner: false,
-        home: Splash(),
+      child: const OverlaySupport.global(
+        child: MaterialApp(
+          title: "Classy Tea",
+          debugShowCheckedModeBanner: false,
+          home: Splash(),
+        ),
       ),
     );
   }
