@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:omdena_srilanka_tea_quality_client/util/api.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:omdena_srilanka_tea_quality_client/util/notify.dart';
 
 class ConnectionStateListner {
   final Connectivity _connectivity = Connectivity();
@@ -18,8 +17,7 @@ class ConnectionStateListner {
       if (result == ConnectivityResult.none) {
         if (_prevConnectivityStatus != ConnectivityResult.none) {
           // user has gone offline
-          showSimpleNotification(const Text("You are offline"),
-              background: Colors.red);
+          Notify.error("You are offline");
         }
       } else {
         if (_prevConnectivityStatus == ConnectivityResult.none) {
@@ -28,12 +26,9 @@ class ConnectionStateListner {
           // check the server status
           Api.checkServerStatus().then((bool status) {
             if (status) {
-              showSimpleNotification(const Text("You are online"),
-                  background: Colors.green);
+              Notify.success("You are online");
             } else {
-              showSimpleNotification(
-                  const Text("Cannot connect with the server"),
-                  background: Colors.orange);
+              Notify.warn("Cannot connect with the server");
             }
           });
         }

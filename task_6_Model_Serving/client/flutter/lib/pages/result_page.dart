@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:omdena_srilanka_tea_quality_client/util/api.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:omdena_srilanka_tea_quality_client/util/notify.dart';
 
 class ResultPage extends StatefulWidget {
   final XFile? image;
@@ -27,9 +27,7 @@ class _ResultPageState extends State<ResultPage> {
           if (result == ConnectivityResult.none)
             {
               // warn user if offline ML model is being used
-              showSimpleNotification(
-                  const Text("You are offline, results maybe less accurate"),
-                  background: Colors.orange),
+              Notify.warn("You are offline, results maybe less accurate"),
 
               // TODO: Implement offline ML model
               setState(() {
@@ -40,6 +38,7 @@ class _ResultPageState extends State<ResultPage> {
             {
               // send image to server
               Api.checkImageQuality(widget.image!.path).then((value) => {
+                    Notify.success("Image results received"),
                     setState(() {
                       _result = value;
                     })
