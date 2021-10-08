@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class ResultPage extends StatefulWidget {
   final XFile? image;
@@ -13,6 +15,23 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   late Size size;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // warn user if offline ML model is being used
+    final Connectivity _connectivity = Connectivity();
+    _connectivity.checkConnectivity().then((ConnectivityResult result) => {
+          if (result == ConnectivityResult.none)
+            {
+              showSimpleNotification(
+                  const Text("You are offline, results maybe less accurate"),
+                  background: Colors.orange)
+            }
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;

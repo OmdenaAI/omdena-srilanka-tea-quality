@@ -35,6 +35,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.4+2
   provider: ^6.0.1
+  connectivity_plus: ^2.0.2
+  overlay_support: ^1.2.1
 
 dev_dependencies:
   flutter_test:
