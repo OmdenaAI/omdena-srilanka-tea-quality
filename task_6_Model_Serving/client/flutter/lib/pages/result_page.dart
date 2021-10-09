@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:omdena_srilanka_tea_quality_client/util/api.dart';
+import 'package:omdena_srilanka_tea_quality_client/util/notify.dart';
 
 class ResultPage extends StatefulWidget {
   final XFile? image;
@@ -15,19 +16,33 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   late Size size;
+  String _result = "Please wait ...";
 
   @override
   void initState() {
     super.initState();
 
-    // warn user if offline ML model is being used
     final Connectivity _connectivity = Connectivity();
     _connectivity.checkConnectivity().then((ConnectivityResult result) => {
           if (result == ConnectivityResult.none)
             {
-              showSimpleNotification(
-                  const Text("You are offline, results maybe less accurate"),
-                  background: Colors.orange)
+              // warn user if offline ML model is being used
+              Notify.warn("You are offline, results maybe less accurate"),
+
+              // TODO: Implement offline ML model
+              setState(() {
+                _result = "Calculated using offline ML model";
+              })
+            }
+          else
+            {
+              // send image to server
+              Api.checkImageQuality(widget.image!.path).then((value) => {
+                    Notify.success("Image results received"),
+                    setState(() {
+                      _result = value;
+                    })
+                  })
             }
         });
   }
@@ -57,7 +72,7 @@ class _ResultPageState extends State<ResultPage> {
                           ),
                         ),
                         Text(
-                          "The best quality is ...",
+                          _result,
                           style: TextStyle(
                             fontSize: size.width * 0.04,
                             fontWeight: FontWeight.w500,
