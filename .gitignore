@@ -140,3 +140,6 @@ uploads/
 
 # Ignore .zip files
 *.zip
+
+# Ignore VSCode settings file
+.vscode/settings.json
