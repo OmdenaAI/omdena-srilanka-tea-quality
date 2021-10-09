@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
+import 'package:omdena_srilanka_tea_quality_client/constants.dart' as constants;
 
 class ApiStatusRes {
   late String status;
@@ -24,12 +25,9 @@ class ApiImageRes {
 }
 
 class Api {
-  static String baseUrl =
-      "http://omdenatealeafqualitypredapi-env-manual.ap-south-1.elasticbeanstalk.com/api/";
-
   static Future<bool> checkServerStatus() async {
     try {
-      var url = Uri.parse(baseUrl);
+      var url = Uri.parse(constants.serverUrl);
       var res = await http.get(url);
 
       if (res.statusCode != 200) {
@@ -46,8 +44,8 @@ class Api {
 
   static Future<String> checkImageQuality(String path) async {
     try {
-      var req =
-          http.MultipartRequest("POST", Uri.parse(baseUrl + "inferences"));
+      var req = http.MultipartRequest(
+          "POST", Uri.parse(constants.serverUrl + "inferences"));
 
       req.files.add(await http.MultipartFile.fromPath('file', path));
 
