@@ -43,21 +43,3 @@ def predict(device, img_tensor):
     output = model(img_tensor)
     _, pred = torch.max(output, 1)
     return CLASS_NAMES[pred]
-
-
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument(
-        "--img_path", "-i", type=str, required=True, help="Path of the image file"
-    )
-    args = ap.parse_args()
-
-    tensor = None
-    with open(args.img_path, "rb") as f:
-        image_bytes = f.read()
-        tensor = transform_image(image_bytes=image_bytes)
-        # print(tensor)
-    device = get_device()
-    print(device)
-    prediction = predict(device, tensor)
-    print(prediction)

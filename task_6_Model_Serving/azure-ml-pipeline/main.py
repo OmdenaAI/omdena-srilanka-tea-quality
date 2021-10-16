@@ -50,6 +50,9 @@ if __name__ == "__main__":
         action="store_true",
         help="existing project/name ok, do not increment",
     )
+    parser.add_argument(
+        "--img_path", "-i", type=str, required=True, help="Path of the image file"
+    )
     opt = parser.parse_args()
     print(opt)
 
@@ -57,8 +60,15 @@ if __name__ == "__main__":
         # This model will save detected tea leaves in the image into individual files.
         exp_detected_dir = detect(opt, save_img=True)
 
-        for img in os.listdir(exp_detected_dir):
-            print(img)
+        tensor = None
+        with open(exp_detected_dir, "rb") as f:
+            image_bytes = f.read()
+            tensor = transform_image(image_bytes=image_bytes)
+            # print(tensor)
+        device = get_device()
+        print(device)
+        prediction = predict(device, tensor) 
+        print(prediction)
 
         # root
         # detect.py (detect)
