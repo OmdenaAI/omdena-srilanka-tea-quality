@@ -1,6 +1,7 @@
 import argparse
 import torch
 import os
+import torchvision.transforms as transforms
 from pathlib import Path
 
 from detect import detect
