@@ -30,4 +30,4 @@ samples, guidance on mobile development, and a full API reference.
 
 ## UI Prototype
 
-<img src="ux_design.png">
+<img src="omdena_UI.png">
