@@ -12,4 +12,4 @@
 
 
 ## UI/UX design for mobile app
-<img src="ux_design.png">
+<img src="omdena_UI.png">
