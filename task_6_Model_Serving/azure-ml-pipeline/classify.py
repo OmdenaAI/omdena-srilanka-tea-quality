@@ -8,8 +8,8 @@ from PIL import Image
 import torchvision.transforms as transforms
 import torch
 
-TEST_FILE_PATH = "example-images/Low_Fresh_Below_best_36.jpg"
-MODEL_FILE_PATH = "model_resnet_18.pth"
+# TEST_FILE_PATH = "example-images/Low_Fresh_Below_best_36.jpg"
+# MODEL_FILE_PATH = "model_resnet_18.pth"
 CLASS_NAMES = [
     "Fresh_Below_Best",
     "Fresh_Best",
@@ -37,8 +37,9 @@ def transform_image(image_bytes):
     return img_transforms(image).unsqueeze(0)
 
 
-def predict(device, img_tensor):
-    model = torch.load("model_resnet_18.pth", map_location=device)
+def predict(img_tensor, model_file_path):
+    device = get_device()
+    model = torch.load(model_file_path, map_location=device)
     img_tensor = img_tensor.to(device)
     output = model(img_tensor)
     _, pred = torch.max(output, 1)

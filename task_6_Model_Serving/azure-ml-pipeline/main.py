@@ -5,6 +5,7 @@ import torchvision.transforms as transforms
 from pathlib import Path
 
 from detect import detect
+from classify import transform_image, predict
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -54,6 +55,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--img-path", "-i", type=str, required=True, help="Path of the image file"
     )
+    parser.add_argument(
+        "--classify-model", "-cm", type=str, required=True, help="Classifier model path"
+    )
     opt = parser.parse_args()
     print(opt)
 
@@ -61,15 +65,14 @@ if __name__ == "__main__":
         # This model will save detected tea leaves in the image into individual files.
         exp_detected_dir = detect(opt, save_img=True)
 
-        tensor = None
-        with open(exp_detected_dir, "rb") as f:
-            image_bytes = f.read()
-            tensor = transform_image(image_bytes=image_bytes)
-            # print(tensor)
-        device = get_device()
-        print(device)
-        prediction = predict(device, tensor) 
-        print(prediction)
+        for det_file in os.listdir(exp_detected_dir):
+            tensor = None
+            with open(det_file, "rb") as f:
+                image_bytes = f.read()
+                tensor = transform_image(image_bytes=image_bytes)
+                # print(tensor)
+            prediction = predict(tensor, opt.classify_model) 
+            print(prediction)
 
         # root
         # detect.py (detect)
