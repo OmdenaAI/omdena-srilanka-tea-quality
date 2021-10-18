@@ -11,11 +11,11 @@ import torch.nn as nn
 sys.path.append('./')  # to run '$ python *.py' files in subdirectories
 logger = logging.getLogger(__name__)
 
-from detector.models.common import Conv, Bottleneck, SPP, DWConv, Focus, BottleneckCSP, Concat, NMS, autoShape
-from detector.models.experimental import MixConv2d, CrossConv, C3
-from detector.utils.autoanchor import check_anchor_order
-from detector.utils.general import make_divisible, check_file, set_logging
-from detector.utils.torch_utils import time_synchronized, fuse_conv_and_bn, model_info, scale_img, initialize_weights, \
+from models.common import Conv, Bottleneck, SPP, DWConv, Focus, BottleneckCSP, Concat, NMS, autoShape
+from models.experimental import MixConv2d, CrossConv, C3
+from utils.autoanchor import check_anchor_order
+from utils.general import make_divisible, check_file, set_logging
+from utils.torch_utils import time_synchronized, fuse_conv_and_bn, model_info, scale_img, initialize_weights, \
     select_device, copy_attr
 
 try:
