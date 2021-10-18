@@ -80,7 +80,7 @@ if __name__ == "__main__":
             if prediction not in classes_dict:
                 classes_dict[prediction] = []
             classes_dict[prediction].append(det_file)
-        print(classes_dict)
+        # print(classes_dict)
         total_det_imgs = len(imgs)
         class_percents = {k:100*len(v)/total_det_imgs for k,v in classes_dict.items()}
         print(class_percents)
