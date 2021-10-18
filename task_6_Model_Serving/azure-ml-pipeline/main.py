@@ -67,23 +67,20 @@ if __name__ == "__main__":
 
         print(exp_detected_dir)
 
-        for det_file in os.listdir(exp_detected_dir):
+        imgs = os.listdir(exp_detected_dir)
+        classes_dict = {}
+        for det_file in imgs:
             det_file_path = os.path.join(exp_detected_dir, det_file)
             tensor = None
             with open(det_file_path, "rb") as f:
                 image_bytes = f.read()
                 tensor = transform_image(image_bytes=image_bytes)
                 # print(tensor)
-            prediction = predict(tensor, opt.classify_model) 
-            print(prediction)
-
-        # root
-        # detect.py (detect)
-        #  TODO: classify.py (classify (img_path) -> class_name)
-        # main.py
-        #  - detect(..)
-        # TODO:
-        # dict() > class_names: count
-        #  for each detected img:
-        #    - classify(img_path)
-        #  print(% of each class)
+            prediction = predict(tensor, opt.classify_model)
+            if prediction not in classes_dict:
+                classes_dict[prediction] = []
+            classes_dict[prediction].append(det_file)
+        print(classes_dict)
+        total_det_imgs = len(imgs)
+        class_percents = {k:100*len(v)/total_det_imgs for k,v in classes_dict.items()}
+        print(class_percents)
