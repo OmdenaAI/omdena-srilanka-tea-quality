@@ -7,9 +7,9 @@ import torch
 import torch.backends.cudnn as cudnn
 from numpy import random
 
-from .models.experimental import attempt_load
-from .utils.datasets import LoadStreams, LoadImages
-from .utils.general import (
+from models.experimental import attempt_load
+from utils.datasets import LoadStreams, LoadImages
+from utils.general import (
     check_img_size,
     non_max_suppression,
     apply_classifier,
@@ -19,8 +19,8 @@ from .utils.general import (
     set_logging,
     increment_path,
 )
-from .utils.plots import plot_one_box
-from .utils.torch_utils import select_device, load_classifier, time_synchronized
+from utils.plots import plot_one_box
+from utils.torch_utils import select_device, load_classifier, time_synchronized
 
 
 def detect(opt, save_img=False):
