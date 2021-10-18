@@ -66,10 +66,11 @@ if __name__ == "__main__":
         exp_detected_dir = detect(opt, save_img=True)
 
         print(exp_detected_dir)
-        
+
         for det_file in os.listdir(exp_detected_dir):
+            det_file_path = os.path.join(exp_detected_dir, det_file)
             tensor = None
-            with open(det_file, "rb") as f:
+            with open(det_file_path, "rb") as f:
                 image_bytes = f.read()
                 tensor = transform_image(image_bytes=image_bytes)
                 # print(tensor)
