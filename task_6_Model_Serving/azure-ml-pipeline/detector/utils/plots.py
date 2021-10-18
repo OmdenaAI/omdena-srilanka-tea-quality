@@ -16,8 +16,8 @@ import yaml
 from PIL import Image, ImageDraw
 from scipy.signal import butter, filtfilt
 
-from utils.general import xywh2xyxy, xyxy2xywh
-from utils.metrics import fitness
+from detector.utils.general import xywh2xyxy, xyxy2xywh
+from detector.utils.metrics import fitness
 
 # Settings
 matplotlib.rc('font', **{'size': 11})

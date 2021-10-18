@@ -13,10 +13,10 @@ sys.path.append('./')  # to run '$ python *.py' files in subdirectories
 import torch
 import torch.nn as nn
 
-import models
-from models.experimental import attempt_load
-from utils.activations import Hardswish
-from utils.general import set_logging, check_img_size
+import detector.models
+from detector.models.experimental import attempt_load
+from detector.utils.activations import Hardswish
+from detector.utils.general import set_logging, check_img_size
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
