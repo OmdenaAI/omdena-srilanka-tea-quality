@@ -4,7 +4,7 @@ import os
 import torchvision.transforms as transforms
 from pathlib import Path
 
-from detect import detect
+from detector.detect import detect
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
