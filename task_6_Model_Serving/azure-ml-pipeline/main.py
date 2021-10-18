@@ -65,6 +65,8 @@ if __name__ == "__main__":
         # This model will save detected tea leaves in the image into individual files.
         exp_detected_dir = detect(opt, save_img=True)
 
+        print(exp_detected_dir)
+        
         for det_file in os.listdir(exp_detected_dir):
             tensor = None
             with open(det_file, "rb") as f:
