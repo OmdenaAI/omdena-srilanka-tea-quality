@@ -52,7 +52,7 @@ if __name__ == "__main__":
         help="existing project/name ok, do not increment",
     )
     parser.add_argument(
-        "--img_path", "-i", type=str, required=True, help="Path of the image file"
+        "--img-path", "-i", type=str, required=True, help="Path of the image file"
     )
     opt = parser.parse_args()
     print(opt)
