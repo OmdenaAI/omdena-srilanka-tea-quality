@@ -8,12 +8,12 @@ class Config:
     DEBUG = False
     TESTING = False
     ALLOWED_EXTENSIONS = {'.png', '.jpg', '.jpeg'}
-    MAX_CONTENT_LENGTH = 1024 * 1024  # 1 MB
+    MAX_CONTENT_LENGTH = 1024 * 1024 * 10 # 10 MB
+    LOGS_DIR = 'outputs/logs/'
 
     @staticmethod
     def init_app(app):
         pass
-
 
 class S3StorageConfig(Config):
     REGION_NAME = os.environ.get("REGION_NAME")
@@ -34,12 +34,12 @@ class DevelopmentConfig(LocalStorageConfig):
     HOST = ""
 
 
-class StagingConfig(S3StorageConfig):
+class StagingConfig(LocalStorageConfig):
     TESTING = True
     HOST = ""
 
 
-class ProductionConfig(S3StorageConfig):
+class ProductionConfig(LocalStorageConfig):
     HOST = ""
 
 
