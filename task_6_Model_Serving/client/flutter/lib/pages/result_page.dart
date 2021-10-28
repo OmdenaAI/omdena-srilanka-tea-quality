@@ -16,7 +16,10 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   late Size size;
-  String _result = "Please wait ...";
+  ApiImageRes? _res;
+  bool _isProcessing = true;
+  bool _isSuccess = true;
+  String _msg = "Loading";
 
   @override
   void initState() {
@@ -31,17 +34,36 @@ class _ResultPageState extends State<ResultPage> {
 
               // TODO: Implement offline ML model
               setState(() {
-                _result = "Calculated using offline ML model";
+                _msg = "TODO offline model";
+                _isProcessing = false;
+
+                // TODO: this line is temporary. Since offline model is yet to implement
+                // I display todo msg as a error
+                _isSuccess = false;
               })
             }
           else
             {
               // send image to server
               Api.checkImageQuality(widget.image!.path).then((value) => {
-                    Notify.success("Image results received"),
-                    setState(() {
-                      _result = value;
-                    })
+                    if (value.isSuccess)
+                      {
+                        Notify.success("Image results received"),
+                        setState(() {
+                          _res = value;
+                          _isProcessing = false;
+                          _isSuccess = true;
+                        })
+                      }
+                    else
+                      {
+                        Notify.error("Error occured while fetching results"),
+                        setState(() {
+                          _msg = value.error;
+                          _isProcessing = false;
+                          _isSuccess = false;
+                        })
+                      }
                   })
             }
         });
@@ -71,13 +93,23 @@ class _ResultPageState extends State<ResultPage> {
                             File(widget.image?.path ?? ""),
                           ),
                         ),
-                        Text(
-                          _result,
-                          style: TextStyle(
-                            fontSize: size.width * 0.04,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        _isProcessing
+                            ? const CircularProgressIndicator()
+                            : _isSuccess
+                                ? Text(
+                                    _res?.result ?? "result",
+                                    style: TextStyle(
+                                      fontSize: size.width * 0.06,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                : Text(
+                                    _msg,
+                                    style: TextStyle(
+                                      fontSize: size.width * 0.04,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
                       ],
                     ),
                   ),

@@ -1,2 +1,1 @@
-const String serverUrl =
-    "http://omdenatealeafqualitypredapi-env-manual.ap-south-1.elasticbeanstalk.com/api/";
+const String serverUrl = "http://srilankachapter.azurewebsites.net/api/";

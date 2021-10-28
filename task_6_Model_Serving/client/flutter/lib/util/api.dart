@@ -17,10 +17,31 @@ class ApiStatusRes {
 class ApiImageRes {
   late String status;
   late String msg;
+  late String result;
+  late String error;
+  Map<String, double> categories = {};
+  bool isSuccess = true;
 
   ApiImageRes(Map<String, dynamic> data) {
     status = data['status'] ?? "n/a";
+
+    categories['below_best'] =
+        data['predictions']['categories']['below_best'] ?? -1;
+    categories['best'] = data['predictions']['categories']['best'] ?? -1;
+    categories['poor'] = data['predictions']['categories']['poor'] ?? -1;
+
+    result = data['predictions']['type'] ?? "unknown";
     msg = data['msg'] ?? "n/a";
+
+    log("Image res success" + status + " " + categories.toString());
+  }
+
+  ApiImageRes.error(String errorMsg) {
+    log("Error occured in ApiImageRes");
+    log(errorMsg);
+
+    isSuccess = false;
+    error = errorMsg;
   }
 }
 
@@ -42,7 +63,7 @@ class Api {
     }
   }
 
-  static Future<String> checkImageQuality(String path) async {
+  static Future<ApiImageRes> checkImageQuality(String path) async {
     try {
       var req = http.MultipartRequest(
           "POST", Uri.parse(constants.serverUrl + "inferences"));
@@ -52,15 +73,14 @@ class Api {
       var res = await req.send();
 
       if (res.statusCode != 200) {
-        return "Response is not okay";
+        return ApiImageRes.error("Response is not okay");
       }
 
       final response = await http.Response.fromStream(res);
-      final data = ApiStatusRes(json.decode(response.body));
-      return data.msg;
+      final data = ApiImageRes(json.decode(response.body));
+      return data;
     } catch (e) {
-      log(e.toString());
-      return "Error occured";
+      return ApiImageRes.error(e.toString());
     }
   }
 }
