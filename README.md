@@ -70,17 +70,3 @@ Using AI to Improve Quality of Green Tea Leaves in Sri Lanka
   ```
   jupyter notebook
   ```
-
-## Tasks
-
-### Task-6: Model serving
-
-#### [Server](task_6_Model_Serving/server/)
-
-Server handles task to serve the model via Flask API using Azure App service.
-
-#### [Client](task_6_Model_Serving/client/)
-
-Mobile application as a client uses the endpoint from server's API to make predictions of the uploaded image.
-
-It also has offline mode (when internet service is unavailable), it has its on-premise model that is used for predictions.
