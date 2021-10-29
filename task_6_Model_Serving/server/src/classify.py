@@ -28,6 +28,9 @@ class ClassifierPrediction:
             'type': self.type,
             'categories': self.categories
         }
+    
+    def __str__(self) -> str:
+        return str(self.serialize())
 
 class TeaLeafClassifier:
     CLASS_NAMES = [
