@@ -2,6 +2,8 @@
 
 This repo contains the Flask API to expose model and get predictions.
 
+![Flask API Server Architecture](Flask_API_Server_Architecture.jpg)
+
 ## Expose Model As An API
 
 1. Model Trainig will happen in server(i.e. where ever training of model is done is refered as server here)
