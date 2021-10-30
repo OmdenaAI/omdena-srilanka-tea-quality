@@ -26,7 +26,7 @@ class ResultCardState extends State<ResultCard> {
   void initState() {
     super.initState();
 
-    Api.dummyResponse().then((value) => {
+    Api.checkImageQuality(widget.image.path).then((value) => {
           if (value.isSuccess)
             {
               Notify.success("Image results received"),
@@ -70,25 +70,31 @@ class ResultCardState extends State<ResultCard> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        const SizedBox(
-                          width: 25,
-                        ),
                         Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _isProcessing
-                                ? const [
-                                    Text("Calculating"),
-                                    Text("Please wait")
-                                  ]
-                                : _isSuccess
-                                    ? [
-                                        const Text("Success"),
-                                        Text(_res?.result ??
-                                            "Results loading...")
-                                      ]
-                                    : [Text(_msg)],
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 25),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: _isProcessing
+                                  ? const [
+                                      Text("Please wait"),
+                                      LinearProgressIndicator()
+                                    ]
+                                  : _isSuccess
+                                      ? [
+                                          const Text("Success"),
+                                          Text(
+                                            _res?.result ??
+                                                "Results loading...",
+                                            style: const TextStyle(
+                                              fontSize: 21,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ]
+                                      : [Text(_msg)],
+                            ),
                           ),
                         )
                       ],
@@ -102,31 +108,38 @@ class ResultCardState extends State<ResultCard> {
                     children: [
                       SizedBox(
                         height: 200,
+                        width: 150,
                         child: Image.file(
                           File(widget.image.path),
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Message " + (_res?.msg ?? "Loading")),
-                          Text("Result " + (_res?.result ?? "Loading")),
-                          Text("Below best: " +
-                              (_res?.categories['below_best'].toString() ??
-                                  "Loading")),
-                          Text("Best " +
-                              (_res?.categories['best'].toString() ??
-                                  "Loading")),
-                          Text("Poor " +
-                              (_res?.categories['poor'].toString() ??
-                                  "Loading")),
-                          const Text("\n"),
-                          ExpandableButton(
-                            child: const Text("Back"),
-                          )
-                        ],
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text((_res?.msg ?? "Loading")),
+                              Text("Result " + (_res?.result ?? "Loading")),
+                              const Text("\n"),
+                              Text("Below best: " +
+                                  (_res?.categories['below_best'].toString() ??
+                                      "Loading")),
+                              Text("Best " +
+                                  (_res?.categories['best'].toString() ??
+                                      "Loading")),
+                              Text("Poor " +
+                                  (_res?.categories['poor'].toString() ??
+                                      "Loading")),
+                              const Text("\n"),
+                              ExpandableButton(
+                                child: const Text("Back"),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
