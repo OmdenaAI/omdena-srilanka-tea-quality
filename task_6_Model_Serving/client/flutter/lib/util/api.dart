@@ -26,9 +26,9 @@ class ApiImageRes {
     status = data['status'] ?? "n/a";
 
     categories['below_best'] =
-        data['predictions']['categories']['below_best'] ?? -1;
-    categories['best'] = data['predictions']['categories']['best'] ?? -1;
-    categories['poor'] = data['predictions']['categories']['poor'] ?? -1;
+        data['predictions']['categories']['below_best'] ?? 0;
+    categories['best'] = data['predictions']['categories']['best'] ?? 0;
+    categories['poor'] = data['predictions']['categories']['poor'] ?? 0;
 
     result = data['predictions']['type'] ?? "unknown";
     msg = data['msg'] ?? "n/a";
