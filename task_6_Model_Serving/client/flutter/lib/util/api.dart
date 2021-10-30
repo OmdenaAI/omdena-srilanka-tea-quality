@@ -83,4 +83,26 @@ class Api {
       return ApiImageRes.error(e.toString());
     }
   }
+
+  // FOR LOCAL DEV PURPOSE ONLY!
+  static Future<ApiImageRes> dummyResponse() async {
+    try {
+      var body = {
+        "status": "success",
+        "msg": "image processed",
+        "predictions": {
+          "type": "Fresh",
+          "categories": {"below_best": 100.0}
+        }
+      };
+
+      final data = ApiImageRes(body);
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      return data;
+    } catch (e) {
+      return ApiImageRes.error(e.toString());
+    }
+  }
 }
