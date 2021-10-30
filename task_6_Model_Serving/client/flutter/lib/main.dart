@@ -39,11 +39,12 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => ResultProvider()),
       ],
-      child: const OverlaySupport.global(
+      child: OverlaySupport.global(
         child: MaterialApp(
           title: "Classy Tea",
           debugShowCheckedModeBanner: false,
-          home: Splash(),
+          theme: ThemeData(fontFamily: 'OpenSans'),
+          home: const Splash(),
         ),
       ),
     );
