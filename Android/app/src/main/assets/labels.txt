@@ -1,0 +1,6 @@
+0 Low Fresh - Below Best
+1 Low Fresh - Best
+2 Low Fresh - Poor
+3 Low Withered - Below Best
+4 Low Withered - Best
+5 Low Withered - Poor

@@ -134,3 +134,9 @@ dmypy.json
 
 # Ignore bin folder
 **/*env/
+
+# Ignore uploads folder
+uploads/
+
+# Ignore .zip files
+*.zip

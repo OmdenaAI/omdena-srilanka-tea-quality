@@ -53,23 +53,20 @@ Using AI to Improve Quality of Green Tea Leaves in Sri Lanka
 
 ## Project Setup 
 
-Open the Command line or Terminal
-
+- Open the Command line or Terminal
 - Clone the repository
-
-```
-git clone https://github.com/OmdenaAI/omdena-srilanka-tea-quality.git
-```
-- Move to the folder
-
-```
-cd omdena-srilanka-tea-quality
-```
+  ```shell
+  git clone https://github.com/OmdenaAI/omdena-srilanka-tea-quality.git
+  ```
+- Change directory
+  ```
+  cd omdena-srilanka-tea-quality
+  ```
 - To open with VSCode
-```
-code .
-```
-- To open with jupyter notebook (or maually open using jupyter notebook app)
-```
-jupyter notebook
-```
+  ```
+  code .
+  ```
+- To open with jupyter notebook (or manually open using jupyter notebook app)
+  ```
+  jupyter notebook
+  ```

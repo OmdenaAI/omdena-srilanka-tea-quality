@@ -1,0 +1,3 @@
+[submodule "omdena-srilanka-tea-quality"]
+	path = omdena-srilanka-tea-quality
+	url = https://github.com/OmdenaAI/omdena-srilanka-tea-quality.git

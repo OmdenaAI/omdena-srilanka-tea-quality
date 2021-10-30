@@ -1,0 +1,78 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Task-6-Server-CI-CD-Pipeline
+env:
+  EB_PACKAGE_S3_BUCKET_NAME: "app-zip-file-storage"
+  EB_APPLICATION_NAME      : "Omdena-Tea-Leaf-Quality-Prediction-API"
+  EB_ENVIRONMENT_NAME      : "Omdenatealeafqualitypredictionapi-env"
+  DEPLOY_PACKAGE_NAME      : "task-6-server-api-${{ github.sha }}.zip"  # zip file name that will store in s3 bucket with unique value
+  AWS_REGION_NAME          : "ap-south-1"  # your application region
+
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the task-6-server branch
+  push:
+    branches: [ task-6-server ]
+  pull_request:
+    branches: [ task-6-server ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  connectingapp_ci_pipeline:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name : Git clone our repository
+        uses : actions/checkout@v2
+
+      - name : Create ZIP deployment package
+        run  : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./task_6_Model_Serving/server/src/
+      
+      - name : Configure my AWS Credentials
+        uses : aws-actions/configure-aws-credentials@v1
+        with :
+          aws-access-key-id     : ${{ secrets.TASK_6_SERVER_AWS_ACCESS_KEY }}
+          aws-secret-access-key : ${{ secrets.TASK_6_SERVER_AWS_SECRET_KEY }}
+          aws-region            : ${{ env.AWS_REGION_NAME }}
+      
+      - name: Copy our Deployment packages to s3 bucket
+        run : aws s3 cp ${{ env.DEPLOY_PACKAGE_NAME }} s3://${{ env.EB_PACKAGE_S3_BUCKET_NAME }}/
+      
+      - name : Print nice message on complete of CI Pipeline
+        run  : echo "CI Pipeline part finished successfully"
+        
+  connectingapp_cd_pipeline:
+    runs-on: ubuntu-latest
+    needs  : [connectingapp_ci_pipeline]
+    
+    steps:
+      - name : Configure my AWS Credentials
+        uses : aws-actions/configure-aws-credentials@v1
+        with :
+          aws-access-key-id     : ${{ secrets.TASK_6_SERVER_AWS_ACCESS_KEY }}
+          aws-secret-access-key : ${{ secrets.TASK_6_SERVER_AWS_SECRET_KEY }}
+          aws-region            : ${{ env.AWS_REGION_NAME }}
+      
+      - name : Create new ElasticBean Application Version
+        run : |
+          aws elasticbeanstalk create-application-version \
+          --application-name ${{ env.EB_APPLICATION_NAME }} \
+          --source-bundle S3Bucket="${{ env.EB_PACKAGE_S3_BUCKET_NAME }}",S3Key="${{ env.DEPLOY_PACKAGE_NAME }}" \
+          --version-label "Ver-${{ github.sha }}" \
+          --description "CommitSHA-${{ github.sha }}"
+       
+      - name : Deploy our new Application Version
+        run  : aws elasticbeanstalk update-environment --environment-name ${{ env.EB_ENVIRONMENT_NAME }} --version-label "Ver-${{ github.sha }}"
+
+      - name : Print nice message on complete of CD Pipeline
+        run  : echo "CD Pipeline part finished successfully"
+  
+### .github/workflows/task-6-server.yml
