@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:omdena_srilanka_tea_quality_client/components/result_card.dart';
 
@@ -37,6 +38,36 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Widget mainButtons() {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 15,
+        ),
+        SizedBox(
+          width: 200,
+          child: ElevatedButton(
+            onPressed: () => {_getImage(ImageSource.camera)},
+            child: const Text(
+              "Open Camera",
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 200,
+          child: ElevatedButton(
+            onPressed: () => {_getImage(ImageSource.gallery)},
+            child: const Text(
+              "Browse Gallery",
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,20 +85,14 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("Classy Tea"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => {_getImage(ImageSource.camera)},
-                        child: const Text("Open Camera"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => {_getImage(ImageSource.gallery)},
-                        child: const Text("Browse Gallery"),
-                      ),
-                    ],
-                  )
+                  const Text(
+                    "Classy Tea",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  images.isEmpty ? mainButtons() : const SizedBox.shrink()
                 ],
               ),
             ),
@@ -75,19 +100,53 @@ class _HomePageState extends State<HomePage> {
               child: AnimatedList(
                 key: _listKey,
                 itemBuilder: (_, index, animation) {
-                  return SlideTransition(
-                    position: Tween<Offset>(
-                      begin: const Offset(-1, 0),
-                      end: const Offset(0, 0),
-                    ).animate(animation),
-                    child: ResultCard(
-                      image: images[index],
-                    ),
+                  return Column(
+                    children: [
+                      SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(-1, 0),
+                          end: const Offset(0, 0),
+                        ).animate(animation),
+                        child: ResultCard(
+                          image: images[index],
+                        ),
+                      ),
+                      index == (images.length - 1)
+                          ? const SizedBox(height: 150)
+                          : const SizedBox.shrink()
+                    ],
                   );
                 },
               ),
             ),
           ],
+        ),
+        floatingActionButton: Wrap(
+          direction: Axis.vertical,
+          children: images.isNotEmpty
+              ? [
+                  Container(
+                    width: 150,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    child: FloatingActionButton.extended(
+                      heroTag: "camerabtn",
+                      onPressed: () => {_getImage(ImageSource.camera)},
+                      label: const Text("Open Camera"),
+                    ),
+                  ),
+                  Container(
+                    width: 150,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    child: FloatingActionButton.extended(
+                      heroTag: "gallerybtn",
+                      onPressed: () => {_getImage(ImageSource.gallery)},
+                      label: const Text("Browse Gallery"),
+                    ),
+                  )
+                ]
+              : [],
         ),
       ),
     );
