@@ -1,10 +1,13 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:expandable/expandable.dart';
 import 'package:omdena_srilanka_tea_quality_client/util/api.dart';
 import 'package:omdena_srilanka_tea_quality_client/util/notify.dart';
+import 'package:omdena_srilanka_tea_quality_client/util/tflite.dart';
 
 class ResultCard extends StatefulWidget {
   final XFile image;
@@ -25,27 +28,55 @@ class ResultCardState extends State<ResultCard> {
   @override
   void initState() {
     super.initState();
+    runPrediction();
+  }
 
-    Api.checkImageQuality(widget.image.path).then((value) => {
-          if (value.isSuccess)
-            {
-              Notify.success("Image results received"),
-              setState(() {
-                _res = value;
-                _isProcessing = false;
-                _isSuccess = true;
-              })
-            }
-          else
-            {
-              Notify.error("Error occured while fetching results"),
-              setState(() {
-                _msg = value.error;
-                _isProcessing = false;
-                _isSuccess = false;
-              })
-            }
+  void runPrediction() async {
+    ConnectivityResult _connection = await Connectivity().checkConnectivity();
+
+    if (_connection == ConnectivityResult.none) {
+      runOfflinePrediction();
+    } else {
+      try {
+        _res = await Api.checkImageQuality(widget.image.path);
+
+        if (_res != null && !_res!.isSuccess) {
+          throw "Online prediction is not success";
+        }
+
+        Notify.success("Image results received");
+
+        setState(() {
+          _isProcessing = false;
+          _isSuccess = true;
         });
+      } catch (e) {
+        Notify.warn("Falling back to offline method");
+        log(e.toString());
+
+        runOfflinePrediction();
+      }
+    }
+  }
+
+  void runOfflinePrediction() async {
+    try {
+      _res = await predictOffline(widget.image.path);
+
+      setState(() {
+        _isSuccess = true;
+        _isProcessing = false;
+      });
+    } catch (e) {
+      Notify.error("Error occured in offline model");
+      log(e.toString());
+
+      setState(() {
+        _isSuccess = false;
+        _msg = "Error occured in offline model";
+        _isProcessing = false;
+      });
+    }
   }
 
   @override
@@ -83,7 +114,7 @@ class ResultCardState extends State<ResultCard> {
                                     ]
                                   : _isSuccess
                                       ? [
-                                          const Text("Success"),
+                                          Text(_res?.msg ?? "Loading"),
                                           Text(
                                             _res?.result ??
                                                 "Results loading...",
@@ -124,14 +155,17 @@ class ResultCardState extends State<ResultCard> {
                               Text((_res?.msg ?? "Loading")),
                               Text("Result " + (_res?.result ?? "Loading")),
                               const Text("\n"),
-                              Text("Below best: " +
-                                  (_res?.categories['below_best'].toString() ??
-                                      "Loading")),
                               Text("Best " +
-                                  (_res?.categories['best'].toString() ??
+                                  (_res?.categories['best']
+                                          ?.toStringAsFixed(2) ??
+                                      "Loading")),
+                              Text("Below best: " +
+                                  (_res?.categories['below_best']
+                                          ?.toStringAsFixed(2) ??
                                       "Loading")),
                               Text("Poor " +
-                                  (_res?.categories['poor'].toString() ??
+                                  (_res?.categories['poor']
+                                          ?.toStringAsFixed(2) ??
                                       "Loading")),
                               const Text("\n"),
                               ExpandableButton(

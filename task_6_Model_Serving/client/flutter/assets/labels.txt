@@ -1,0 +1,6 @@
+Fresh-below_best
+Fresh-best
+Fresh-poor
+Withered-below_best
+Withered-best
+Withered-poor

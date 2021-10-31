@@ -26,14 +26,39 @@ class ApiImageRes {
     status = data['status'] ?? "n/a";
 
     categories['below_best'] =
-        data['predictions']['categories']['below_best'] ?? 0;
-    categories['best'] = data['predictions']['categories']['best'] ?? 0;
-    categories['poor'] = data['predictions']['categories']['poor'] ?? 0;
+        data['predictions']['categories']['below_best'] ?? 0.0;
+    categories['best'] = data['predictions']['categories']['best'] ?? 0.0;
+    categories['poor'] = data['predictions']['categories']['poor'] ?? 0.0;
 
     result = data['predictions']['type'] ?? "unknown";
     msg = data['msg'] ?? "n/a";
 
+    double maxValue = 0;
+    String maxLabel = "";
+    for (var k in categories.keys) {
+      double value = categories[k] ?? 0.0;
+      if (maxValue < value) {
+        maxValue = value;
+        maxLabel = k;
+      }
+    }
+
+    result += " " + maxLabel.replaceAll("_", " ");
+
     log("Image res success" + status + " " + categories.toString());
+  }
+
+  ApiImageRes.offline(String predres, Map<String, double> labels) {
+    status = "success";
+    msg = "image processed offline";
+    result = predres.split("-")[0];
+
+    categories['below_best'] = (labels["$result-below_best"] ?? 0) * 100;
+    categories['best'] = (labels["$result-best"] ?? 0) * 100;
+    categories['poor'] = (labels["$result-poor"] ?? 0) * 100;
+
+    // update result variable
+    result += " " + predres.split("-")[1].replaceAll("_", " ");
   }
 
   ApiImageRes.error(String errorMsg) {

@@ -24,9 +24,10 @@ samples, guidance on mobile development, and a full API reference.
 ## How to contribute
 
 1. Clone the repo
-2. Create a new branch ( `{your_name}/{feature_name}` is preferred, not compulsory)
-3. Make changes, commit them
-4. Send a pull request to `client-main` branch
+2. Run `tflite.sh` or `tflite.bat`
+3. Create a new branch ( `{your_name}/{feature_name}` is preferred, not compulsory)
+4. Make changes, commit them
+5. Send a pull request to `client-main` branch
 
 ## UI Prototype
 
