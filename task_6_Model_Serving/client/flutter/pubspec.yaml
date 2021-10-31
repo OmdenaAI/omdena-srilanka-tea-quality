@@ -39,6 +39,7 @@ dependencies:
   overlay_support: ^1.2.1
   http: ^0.13.4
   expandable: ^5.0.1
+  tflite_flutter: ^0.9.0
 
 dev_dependencies:
   flutter_test:
