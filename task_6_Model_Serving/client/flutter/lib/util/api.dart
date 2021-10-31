@@ -26,14 +26,24 @@ class ApiImageRes {
     status = data['status'] ?? "n/a";
 
     categories['below_best'] =
-        data['predictions']['categories']['below_best'] ?? 0;
-    categories['best'] = data['predictions']['categories']['best'] ?? 0;
-    categories['poor'] = data['predictions']['categories']['poor'] ?? 0;
+        data['predictions']['categories']['below_best'] ?? 0.0;
+    categories['best'] = data['predictions']['categories']['best'] ?? 0.0;
+    categories['poor'] = data['predictions']['categories']['poor'] ?? 0.0;
 
     result = data['predictions']['type'] ?? "unknown";
     msg = data['msg'] ?? "n/a";
 
     log("Image res success" + status + " " + categories.toString());
+  }
+
+  ApiImageRes.offline(String predres, Map<String, double> labels) {
+    status = "success";
+    msg = "image processed offline";
+    result = predres.split("-")[0];
+
+    categories['below_best'] = (labels["$result-below_best"] ?? 0) * 100;
+    categories['best'] = (labels["$result-best"] ?? 0) * 100;
+    categories['poor'] = (labels["$result-poor"] ?? 0) * 100;
   }
 
   ApiImageRes.error(String errorMsg) {
