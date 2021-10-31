@@ -26,9 +26,9 @@ class ApiImageRes {
     status = data['status'] ?? "n/a";
 
     categories['below_best'] =
-        data['predictions']['categories']['below_best'] ?? -1;
-    categories['best'] = data['predictions']['categories']['best'] ?? -1;
-    categories['poor'] = data['predictions']['categories']['poor'] ?? -1;
+        data['predictions']['categories']['below_best'] ?? 0;
+    categories['best'] = data['predictions']['categories']['best'] ?? 0;
+    categories['poor'] = data['predictions']['categories']['poor'] ?? 0;
 
     result = data['predictions']['type'] ?? "unknown";
     msg = data['msg'] ?? "n/a";
@@ -78,6 +78,28 @@ class Api {
 
       final response = await http.Response.fromStream(res);
       final data = ApiImageRes(json.decode(response.body));
+      return data;
+    } catch (e) {
+      return ApiImageRes.error(e.toString());
+    }
+  }
+
+  // FOR LOCAL DEV PURPOSE ONLY!
+  static Future<ApiImageRes> dummyResponse() async {
+    try {
+      var body = {
+        "status": "success",
+        "msg": "image processed",
+        "predictions": {
+          "type": "Fresh",
+          "categories": {"below_best": 100.0}
+        }
+      };
+
+      final data = ApiImageRes(body);
+
+      await Future.delayed(const Duration(seconds: 2));
+
       return data;
     } catch (e) {
       return ApiImageRes.error(e.toString());
