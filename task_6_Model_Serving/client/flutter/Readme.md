@@ -7,7 +7,7 @@ Client side application of Omdena Sri Lanka Tea Quality Project
 > TLDR;
 >
 > 1.  Install flutter
-> 2.  cd task_6_Model_Serving/client
+> 2.  cd task_6_Model_Serving/client/flutter
 > 3.  flutter run
 
 This project is a starting point for a Flutter application.
