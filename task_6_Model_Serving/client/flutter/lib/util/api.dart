@@ -33,6 +33,18 @@ class ApiImageRes {
     result = data['predictions']['type'] ?? "unknown";
     msg = data['msg'] ?? "n/a";
 
+    double maxValue = 0;
+    String maxLabel = "";
+    for (var k in categories.keys) {
+      double value = categories[k] ?? 0.0;
+      if (maxValue < value) {
+        maxValue = value;
+        maxLabel = k;
+      }
+    }
+
+    result += " " + maxLabel.replaceAll("_", " ");
+
     log("Image res success" + status + " " + categories.toString());
   }
 
@@ -44,6 +56,9 @@ class ApiImageRes {
     categories['below_best'] = (labels["$result-below_best"] ?? 0) * 100;
     categories['best'] = (labels["$result-best"] ?? 0) * 100;
     categories['poor'] = (labels["$result-poor"] ?? 0) * 100;
+
+    // update result variable
+    result += " " + predres.split("-")[1].replaceAll("_", " ");
   }
 
   ApiImageRes.error(String errorMsg) {
