@@ -1,0 +1,16 @@
+# Ignore Virtual environment
+api-env/
+
+# Ignore VSCode
+.vscode/
+
+# Ignore Python cache
+__pycache__/
+
+# Ignore outputs folder
+outputs/
+uploads/
+
+# Ignore model_helper+model_handler folders
+model_helper/
+model_handler/
