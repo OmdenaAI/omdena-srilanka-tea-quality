@@ -1,0 +1,31 @@
+name: simple_environment
+dependencies:
+  # The python interpreter version.
+  # Currently Azure ML only supports 3.5.2 and later.
+- python=3.6.2
+- scikit-learn
+- pandas
+- pip:
+  - azureml-defaults
+  - azureml-mlflow
+  - azure-ml-api-sdk
+  - scikit-learn
+  - azureml-core
+  - pickle5
+  - azureml-sdk
+  - azureml-widgets
+  - pillow==5.4.1
+  - matplotlib
+  - numpy==1.18.5
+  - opencv-python
+  - PyYAML==5.3
+  - scipy==1.4.1
+  - tensorboard==2.2
+  - torch==1.9.0
+  - torchvision==0.10.0
+  - tqdm==4.41.0
+  - coremltools==4.0
+  - onnx==1.8.0
+  - scikit-learn==0.19.2  
+  - thop 
+  - pycocotools
