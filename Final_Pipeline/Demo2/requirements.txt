@@ -1,4 +1,4 @@
-streamlit==0.87.0
+streamlit==1.11.1
 keras_nightly==2.5.0.dev2021032900
 tqdm==4.59.0
 requests==2.25.1
